@@ -6,11 +6,10 @@
 package data;
 
 import com.philips.lighting.hue.sdk.PHAccessPoint;
-import com.philips.lighting.hue.sdk.PHBridgeSearchManager;
 import com.philips.lighting.hue.sdk.PHHueSDK;
-import com.philips.lighting.hue.sdk.PHMessageType;
-import com.philips.lighting.hue.sdk.PHSDKListener;
 import com.philips.lighting.model.PHBridge;
+import com.philips.lighting.model.PHLight;
+import com.philips.lighting.model.PHLightState;
 import java.util.List;
 
 /**
@@ -19,9 +18,12 @@ import java.util.List;
  */
 public class GameHue {
     private PHHueSDK phHueSDK = PHHueSDK.getInstance();
+    PHLightState lightState = new PHLightState();
+    PHBridge bridge;
     
     private final String AP_IP_ADDRESS = "192.168.1.25";
     private final String AP_USERNAME = "newdeveloper";
+    public List<PHLight> lightList = null;
 
     public GameHue() {
         test();
@@ -44,11 +46,26 @@ public class GameHue {
         String aPoint = phHueSDK.getAllBridges().get(0).toString();
         return aPoint;
     }
-    
+    /**
+     * Get lights on the bridge and put them in a list
+     */
     public void getLights(){
-        PHBridge bridge = PHHueSDK.getInstance().getSelectedBridge();
+        bridge = PHHueSDK.getInstance().getSelectedBridge();
         for(int c=0; c<bridge.getResourceCache().getAllLights().size(); c++){
             System.out.println(bridge.getResourceCache().getAllLights().get(c).toString());
+            lightList = bridge.getResourceCache().getAllLights();
         }
+    }
+    
+    public void lightOff(PHLight light){
+        bridge = PHHueSDK.getInstance().getSelectedBridge();
+        lightState.setBrightness(0);
+        bridge.updateLightState(light, lightState);
+    }
+    
+    public void lightOn(PHLight light){
+        bridge = PHHueSDK.getInstance().getSelectedBridge();
+        lightState.setBrightness(100);
+        bridge.updateLightState(light, lightState);
     }
 }
