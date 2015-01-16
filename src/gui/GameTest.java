@@ -18,7 +18,7 @@ package gui;
 
 import com.philips.lighting.model.PHLight;
 import data.GameHue;
-import data.winListener;
+import data.WinListener;
 import java.io.File;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -30,7 +30,7 @@ import javax.swing.filechooser.FileFilter;
  */
 public class GameTest extends javax.swing.JFrame {
     GameHue g = new GameHue();
-    winListener p;
+    WinListener p;
     DefaultListModel list = new DefaultListModel();
     FileFilter f = new FileFilter() {
         /**
@@ -335,7 +335,7 @@ public class GameTest extends javax.swing.JFrame {
 
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         if(!jTextField1.getText().isEmpty()){
-            p = new winListener(jTextField1.getText().toLowerCase().replaceAll("([a-z]|\\(x|[0-Z]|\\s|\\))+([\\:\\\\])", ""));
+            p = new WinListener(jTextField1.getText().toLowerCase().replaceAll("([a-z]|\\(x|[0-Z]|\\s|\\))+([\\:\\\\])", ""));
             JOptionPane.showMessageDialog(rootPane, p.isRunning());
         } else {
             JOptionPane.showMessageDialog(rootPane, "Please select a program");
