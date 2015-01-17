@@ -40,6 +40,7 @@ public class WinListener {
      * will then using a buffered reader read the next line and check if the
      * index of the program is 0 which is the first line else get the next line.
      * Until it finds the program or there is no more lines left.
+     * @return If the program is running then return true else return false
      */
     public boolean isRunning(){
         try {
