@@ -306,6 +306,11 @@ public class GameTest extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         g.getLights();
+        // Clear list
+        if(!g.lightList.isEmpty()){
+            list.clear();
+        }
+        
         for(int c=0; c<g.lightList.size(); c++){
             list.addElement(g.lightList.get(c));
         }
@@ -321,7 +326,7 @@ public class GameTest extends javax.swing.JFrame {
 
     private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
         if(!jList1.isSelectionEmpty()){
-            g.lightOn((PHLight) list.get(jList1.getSelectedIndex()));
+            g.lightOn((PHLight) list.get(jList1.getSelectedIndex()),jSlider4.getValue());
         } else {
             System.out.println("Please select a light");
         }

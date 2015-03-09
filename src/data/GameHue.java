@@ -32,7 +32,9 @@ public class GameHue {
     PHLightState lightState = new PHLightState();
     PHBridge bridge;
     
+    // The IP address of the bridge adapter.
     private final String AP_IP_ADDRESS = "192.168.1.25";
+    // Username that you created for the bridge http://www.developers.meethue.com/documentation/getting-started
     private final String AP_USERNAME = "newdeveloper";
     public List<PHLight> lightList = null;
 
@@ -74,9 +76,9 @@ public class GameHue {
         bridge.updateLightState(light, lightState);
     }
     
-    public void lightOn(PHLight light){
+    public void lightOn(PHLight light, int brightness){
         bridge = PHHueSDK.getInstance().getSelectedBridge();
-        lightState.setBrightness(100);
+        lightState.setBrightness(brightness);
         bridge.updateLightState(light, lightState);
     }
 }
