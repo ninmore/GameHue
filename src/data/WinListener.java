@@ -35,7 +35,7 @@ public class WinListener {
     /**
      * Checks if program is running or not.
      * If the program is running then return true else return false. This works
-     * by executing an command line in windows tasklist to get a list of programs
+     * by executing an command line in windows task list to get a list of programs
      * that matches the given criteria for example 'thunderbird.exe', it 
      * will then using a buffered reader read the next line and check if the
      * index of the program is 0 which is the first line else get the next line.
@@ -45,9 +45,10 @@ public class WinListener {
     public boolean isRunning(){
         try {
             String data;
+            // Execute command TASKLIST /FI to find if the program is running or not.
             Process p = Runtime.getRuntime().exec("TASKLIST /FI \"IMAGENAME eq " + program + "\" /NH");
             BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
-            while((data = in.readLine()) != null) {
+            while((data = in.readLine().toLowerCase()) != null) {
                 System.out.println(data);
                 if(data.indexOf(program) == 0) {
                     return true;
